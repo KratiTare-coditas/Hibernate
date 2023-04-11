@@ -84,7 +84,7 @@ public class TodoDaoImpl implements TodoDao {
     }
 
     @Override
-    public boolean deleteTodo(int id) throws SQLException {
+    public boolean deleteTodo(long id) throws SQLException {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
@@ -95,11 +95,11 @@ public class TodoDaoImpl implements TodoDao {
 //            transaction.commit();
             if (todo != null) {
                 session.delete(todo);
-             //   transaction.commit();
+               transaction.commit();
                 System.out.println("todo is deleted");
                 return true;
             }
-          transaction.commit();
+          //transaction.commit();
             // commit transaction
 
         } catch (Exception e) {
